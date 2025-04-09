@@ -42,4 +42,18 @@ export class AuthService {
 
     return { token };
   }
+  async getUsers(): Promise<any> {
+    try {
+      const users = await prisma.user.findMany({
+        select: { id: true, username: true, email: true },
+      });
+      return users;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      } else {
+        throw new Error("Unknown error fetching users");
+      }
+    }
+  }
 }

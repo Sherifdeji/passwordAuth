@@ -31,4 +31,17 @@ export class AuthController {
       }
     }
   }
+
+  async getUsers(req: Request, res: Response): Promise<any> {
+    try {
+      const users = await authService.getUsers();
+      res.status(200).json(users);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "Unknown error fetching users" });
+      }
+    }
+  }
 }

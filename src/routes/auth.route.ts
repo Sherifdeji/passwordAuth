@@ -17,4 +17,8 @@ router.post("/login", validateLoginInput, (req: Request, res: Response) =>
   authController.login(req, res)
 );
 
+router.get("/users", (req: Request, res: Response) =>
+  authController.getUsers(req, res)
+);
+
 export default router;
